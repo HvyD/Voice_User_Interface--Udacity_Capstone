@@ -97,8 +97,6 @@ def deep_rnn_model(input_dim, units, recur_layers, output_dim=29):
     simple_rnn = []
     bn_cnn = []
     for i in range (0,recur_layers):
-        #Iterate over each layer and add them to an array
-        # Add recurrent layers with batch normalization
         simple_rnn_aux = GRU(units, return_sequences=True, implementation=2, name="rnn"+str(i))(prev_input)
         simple_rnn.append(simple_rnn_aux)
         # Add batch normalization to each layer
@@ -141,8 +139,7 @@ def final_model(input_dim,units, recur_layers, output_dim=29):
     # TODO: Specify the layers in your network
     prev_input = input_data
     bidir_rnn = []
-    
-    #loop layers on reapeat
+    #loop bi-direct_layers on reapeat
     for i in range (0,recur_layers):
         bidir_rnn_aux = Bidirectional(GRU(units, return_sequences=True, implementation=2, name="rnn"+str(i)))(prev_input)
         bidir_rnn.append(bidir_rnn_aux)
